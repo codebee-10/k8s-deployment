@@ -103,14 +103,36 @@ sudo kubectl -n kube-system describe secret $(kubectl -n kube-system get secret 
 
 ### install istio for kubernetes cluster
 
-```
-sudo ./install_istio.sh
+1. use helm install kubernetes istio mesh 
 
 ```
+sudo .istio/install_istio_centos.sh
 
+```
 
+2. token permission
+clusterrolebinding.yaml:
 
+```
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: tiller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: tiller
+    namespace: kube-system
 
+```
+
+3. use tiller after create
+```
+kubectl create -f ./clusterrolebinding.yaml:
+```
 
 
 
