@@ -1,5 +1,5 @@
 # k8s_deployment
-kubernetes deployment sh on centos 7.x
+kubernetes deployment sh for centos 7.x
 
 ### use install_k8s.sh to deploy k8s
 
@@ -101,6 +101,12 @@ sudo kubectl -n kube-system describe secret $(kubectl -n kube-system get secret 
 ```
 
 
+### install istio for kubernetes cluster
+
+```
+sudo ./install_istio.sh
+
+```
 
 
 
