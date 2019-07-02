@@ -13,6 +13,15 @@ sudo ./install_k8s.sh
 sudo ./uninstall_k8s.sh
 ```
 
+### ERROR: "The connection to the server localhost:8080 was refused", you can run under command line :
+```
+cp -f /etc/kubernetes/admin.conf $HOME/
+chown $(id -u):$(id -g) $HOME/admin.conf
+export KUBECONFIG=$HOME/admin.conf
+echo "export KUBECONFIG=$HOME/admin.conf" >>  ~/.bash_profile
+```
+
+
 ### login kubernetes dashboard
 
 1. update kubernetes-dashboard.yaml 
@@ -37,7 +46,24 @@ spec:
 
 ```
 
-2. create admin-user.yaml file : 
+1.1. create clusterrolebinding.yaml file:
+
+```
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: tiller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: tiller
+    namespace: kube-system
+```
+
+1.2. create admin-user.yaml file : 
 
 ```
 apiVersion: v1
@@ -62,13 +88,18 @@ subjects:
   namespace: kube-system
 ```
 
-3. take Token:
+```
+sudo kubectl create -f ./clusterrolebinding.yaml
+sudo kubectl create -f ./admin-user.yaml
+```
+
+2. take Token:
 ```
 sudo kubectl describe serviceaccount admin -n kube-system
 sudo kubectl describe secret admin-token-**** -n kube-system
 ```
 
-4. take permission:
+3. take permission:
 create admin-user-admin.rbac.yaml:
 
 ```
@@ -93,7 +124,7 @@ subjects:
   namespace: kube-system
 ```
 
-5. use admin token login
+4. use admin token login
 
 ```
 sudo kubectl create -f admin-user-admin.rbac.yaml
@@ -131,7 +162,7 @@ subjects:
 
 3. use tiller after create
 ```
-kubectl create -f ./clusterrolebinding.yaml:
+kubectl create -f ./clusterrolebinding.yaml
 ```
 
 
