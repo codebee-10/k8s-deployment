@@ -227,6 +227,15 @@ kubectl create -f dns/dns-svc.yaml
 
 after deploy success, you can use pod_name:port == clusterIP:port 
 
+### Ingress
+
+```
+kubectl create -f ingress/app-ingress-rc.yaml
+kubectl create -f ingress/app-ingress.yaml
+```
+
+after deploy success , you can use curl --resolve appurl.com:80:machine ip  appurl.com/web
+
 ### CA Signature
 
 

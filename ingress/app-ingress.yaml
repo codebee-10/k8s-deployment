@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app-ingress
+  labels:
+    ingress: app-ingress
+spec:
+  rules:
+    - host: appurl.com
+      http:
+        paths:
+          - path: /web
+            backend:
+              serviceName: awesome-app
+              servicePort: 80
