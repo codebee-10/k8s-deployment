@@ -214,7 +214,20 @@ kubectl rolling-update awesome-app -n development  --image=awesome-app:2.0
 
 ### DNS Service
 
+update every Node kubelet like this
 
+```
+kubelet
+--cluster_dns=169.169.0.100
+--cluster_domain=cluster.dadi
+
+kubectl create -f dns/dns-rc.yaml
+kubectl create -f dns/dns-svc.yaml
+```
+
+after deploy success, you can use pod_name:port == clusterIP:port 
+
+### CA Signature
 
 
 
