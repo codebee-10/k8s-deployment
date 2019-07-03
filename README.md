@@ -135,6 +135,55 @@ kubectl create -f ./clusterrolebinding.yaml:
 ```
 
 
+### deploy app
+
+1. create rc [ReplicationController], svc [Service]
+
+service type: NodePort
+service selector: awesome-app
+
+```
+kubectl create -f app/app-rc.yaml
+kubectl create -f app/app-svc.yaml
+```
+
+after deploy success, you can browse http://ip:NodePort
+
+### ssh container
+
+```
+kubectl exec -ti awesome-app -c awesome-app -n development /bin/sh
+```
+
+### show log
+
+```
+kubectl logs -f awesome-app -c awesome-app -n development
+```
+
+### Scale Pods
+
+```
+kubectl scale rc awesome-app -n development --replicas=3
+```
+
+### HPA
+
+```
+kubectl autoscale deployment awesome-app —-cpu-percent=90 —min=1 —max=10
+```
+
+
+### Rolling update
+
+```
+kubectl rolling-update awesome-app -n development  --image=awesome-app:2.0
+
+```
+
+### DNS Service
+
+
 
 
 
