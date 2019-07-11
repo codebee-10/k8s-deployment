@@ -1,10 +1,10 @@
 # k8s_deployment
 kubernetes deployment sh for centos 7.x
 
-### use install_k8s.sh to deploy k8s
+### use install_k8s_centos_master.sh to deploy k8s
 
 ```
-sudo ./install_k8s.sh
+sudo ./install_k8s_centos_master.sh
 ```
 
 ### use uninstall_k8s.sh to remove docker and k8s
@@ -168,9 +168,7 @@ kubectl create -f ./clusterrolebinding.yaml
 ### deploy nodes
 
 ```
-docker pull registry.aliyuncs.com/google_containers/kube-proxy:v1.15.0
-docker pull registry.aliyuncs.com/google_containers/coredns:1.3.1
-docker pull registry.aliyuncs.com/google_containers/pause:3.1
+./install_k8s_centos_node.sh
 ```
 
 ### deploy app
