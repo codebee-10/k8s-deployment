@@ -165,6 +165,13 @@ subjects:
 kubectl create -f ./clusterrolebinding.yaml
 ```
 
+### deploy nodes
+
+```
+docker pull registry.aliyuncs.com/google_containers/kube-proxy:v1.15.0
+docker pull registry.aliyuncs.com/google_containers/coredns:1.3.1
+docker pull registry.aliyuncs.com/google_containers/pause:3.1
+```
 
 ### deploy app
 
