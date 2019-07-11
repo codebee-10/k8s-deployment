@@ -239,6 +239,14 @@ after deploy success , you can use curl --resolve appurl.com:80:machine ip  appu
 ### CA Signature
 
 
+### Errors
+
+problem 1:
+```
+failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: "cgroupfs" is different from docker cgroup driver: "systemd"
+
+```
+
 
 
 
