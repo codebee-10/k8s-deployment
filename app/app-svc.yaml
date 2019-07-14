@@ -4,9 +4,12 @@ metadata:
   name: awesome-app
   namespace: development
 spec:
-  type: NodePort
+  # type: NodePort
   ports:
-  - port: 80
-    nodePort: 30020
+  - port: 30020
+    targetPort: 80
+    # nodePort: 30020
   selector:
     app: awesome-app
+  type: LoadBalancer
+  # externalTrafficPolicy: local
