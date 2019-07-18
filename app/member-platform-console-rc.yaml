@@ -1,32 +1,27 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: awesome-app
+  name: member-platform
   namespace: dev
   labels:
-    name: awesome-app
+    name: member-platform
 spec:
-  replicas: 1
+  replicas: 2
   selector:
-    app: awesome-app
+    app: member-platform
   template:
     metadata:
       labels:
-
+        app: member-platform
     spec:
       containers:
-      - name: awesome-app
-        image: docker.io/roandocker/msa_lumen:1.0
+      - name: member-platform
+        image: farzer/platform-preview:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-      imagePullSecrets:
-        - name: my-secret
         # command: ["/bin/sh"]
-        # args: ["-c","cp index.html website_files; nginx"]
-        # env:
-        # - name: MYSQL_SERVICE_HOST
-        #   value: 'awesome-app-mysql'
+        # args: ["-c","cd root; git clone http://git.tech.nanhaicorp.com.cn/dd01-member/member-platform-console.git; cd member-platform-console;"]
         # resources:
         #   limits:
         #     cpu: 100m
