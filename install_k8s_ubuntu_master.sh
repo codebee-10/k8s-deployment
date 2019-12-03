@@ -27,9 +27,12 @@ deb http://mirrors.163.com/ubuntu/ xenial-security universe
 deb-src http://mirrors.163.com/ubuntu/ xenial-security universe
 EOF
 
-curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | apt-key add -
+apt-get install apt-transport-https ca-certificates curl software-properties-common lrzsz -y
 
-echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+apt-get update && apt-get install -y apt-transport-https
+curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+
+echo "deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
 
 apt-get update
 
